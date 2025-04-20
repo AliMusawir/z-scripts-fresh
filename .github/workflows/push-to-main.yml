@@ -21,10 +21,10 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@35.223.193.96 << EOF
+          ssh -o StrictHostKeyChecking=no ammog@35.223.193.96 << EOF
             set -e
 
-            cd /home/OpenHands
+            cd /home/z-scripts
             git fetch origin
             git reset --hard origin/main
 
