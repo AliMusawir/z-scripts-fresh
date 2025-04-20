@@ -33,7 +33,7 @@ jobs:
             poetry run python3 openhands/runtime/utils/runtime_build.py --base_image nikolaik/python-nodejs:python3.12-nodejs22 --build_folder containers/runtime --force_rebuild
             ./containers/build.sh -i runtime -o ahmed-z0 -t local --load
 
-            docker-compose -f /home/docker-compose.yml down
-            docker-compose -f /home/docker-compose.yml up -d --build --remove-orphans
+            docker compose -f /home/docker-compose.yml down
+            docker compose -f /home/docker-compose.yml up -d
 
             EOF
