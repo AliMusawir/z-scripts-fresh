@@ -1,0 +1,39 @@
+name: Deploy to Main Server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@35.223.193.96 << EOF
+            set -e
+
+            cd /home/OpenHands
+            git fetch origin
+            git reset --hard origin/main
+
+            ./containers/build.sh -i openhands -o ahmed-z0 -t local --load
+            
+            poetry run python3 openhands/runtime/utils/runtime_build.py --base_image nikolaik/python-nodejs:python3.12-nodejs22 --build_folder containers/runtime --force_rebuild
+            ./containers/build.sh -i runtime -o ahmed-z0 -t local --load
+
+            docker-compose -f /home/docker-compose.yml down
+            docker-compose -f /home/docker-compose.yml up -d --build --remove-orphans
+
+            EOF
