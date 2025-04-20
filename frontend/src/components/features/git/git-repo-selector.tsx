@@ -104,7 +104,7 @@ export function GitRepositorySelector({
       inputProps={{
         classNames: {
           inputWrapper:
-            "text-sm w-full rounded-[4px] px-3 py-[10px] bg-[#525252] text-[#A3A3A3]",
+            " !p-4 border border-primarylight hover:border-primary rounded-full transition-all duration-300 !bg-white  transition-all placeholder-lightergray focus:outline-none focus:ring-2",
         },
         endContent: isLoading ? <Spinner size="sm" /> : undefined,
       }}

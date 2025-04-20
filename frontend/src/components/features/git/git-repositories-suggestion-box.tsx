@@ -54,7 +54,7 @@ export function GitRepositoriesSuggestionBox({
     <SuggestionBox
       title={t(I18nKey.LANDING$OPEN_REPO)}
       content={
-        isLoggedIn ? (
+        !isLoggedIn ? (
           <GitRepositorySelector
             onInputChange={setSearchQuery}
             onSelect={handleSubmit}
@@ -66,8 +66,9 @@ export function GitRepositoriesSuggestionBox({
           <BrandButton
             testId="connect-to-github"
             type="button"
-            variant="secondary"
-            className="w-full text-content border-content"
+            className="w-full bg-primary hover:bg-primarylight text-white font-medium py-3 px-4 rounded-full 
+                        transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg 
+                        disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
             onClick={handleConnectToGitHub}
             startContent={<GitHubLogo width={20} height={20} />}
           >

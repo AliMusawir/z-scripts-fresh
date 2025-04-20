@@ -62,16 +62,17 @@ export function TaskForm({ ref }: TaskFormProps) {
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-2"
       >
-        <SuggestionBubble
+        {/* <SuggestionBubble
           suggestion={suggestion}
           onClick={onClickSuggestion}
           onRefresh={onRefreshSuggestion}
-        />
+        /> */}
         <div
           className={cn(
-            "border border-neutral-600 px-4 rounded-lg text-[17px] leading-5 w-full transition-colors duration-200",
-            inputIsFocused ? "bg-neutral-600" : "bg-tertiary",
-            "hover:border-neutral-500 focus-within:border-neutral-500",
+            "border border-primary px-4 rounded-lg text-[17px] leading-5 w-full transition-colors duration-200",
+            inputIsFocused
+              ? "border-primary shadow-sm focus:ring-primarylight focus:border-primary"
+              : "border-gray-300 hover:border-primarylight",
           )}
         >
           {isPending ? (
