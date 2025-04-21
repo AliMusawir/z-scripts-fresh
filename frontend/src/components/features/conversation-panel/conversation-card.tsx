@@ -238,7 +238,33 @@ export function ConversationCard({
               </>
             )}
           </p>
+          {/* Z360 Specific Buttons */}
+          {selectedRepository?.includes("Z360") && conversationId && (
+            <div className="mt-2 flex items-center space-x-2">
+              <a
+                href={`https://admin---${conversationId}.openhands.zikrainfotech.com`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-2 py-1 text-xs border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition-colors duration-150"
+                onClick={(e) => e.stopPropagation()} // Prevent card click
+                title="Open SaaS Admin"
+              >
+                SaaS
+              </a>
+              <a
+                href={`https://main---${conversationId}.openhands.zikrainfotech.com`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-2 py-1 text-xs border border-purple-500 text-purple-500 rounded hover:bg-purple-500 hover:text-white transition-colors duration-150"
+                onClick={(e) => e.stopPropagation()} // Prevent card click
+                title="Open Main Instance"
+              >
+                Main
+              </a>
+            </div>
+          )}
         </div>
+
       </div>
 
       <BaseModal
