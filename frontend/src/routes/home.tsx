@@ -28,7 +28,7 @@ function Home() {
   return (
     <div
       data-testid="home-screen"
-      className=" bg-white text-content h-full   relative rounded-2xl overflow-hidden"
+      className=" bg-white text-[#6A6A6C] h-full   relative rounded-2xl overflow-hidden"
     >
       <div className="bg-gradient-to-br from-[#1FACD3]/80  to-[#FFD436]/80 w-full h-full flex flex-col items-center justify-center relative overflow-y-auto ">
         <div className="bg-white rounded-2xl shadow-2xl z-10 px-8 py-6 flex flex-col items-center justify-center">

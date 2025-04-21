@@ -18,7 +18,7 @@ export default {
         success: "#A5E75E",
         tertiary: "#454545", // gray, used for inputs
         "tertiary-light": "#B7BDC2", // lighter gray, used for borders and placeholder text
-        content: "#6A6A6C", // light gray, used mostly for text
+        content: "#ECEDEE", // light gray, used mostly for text
         "content-2": "#F9FBFE",
       },
     },
