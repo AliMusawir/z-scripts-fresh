@@ -39,7 +39,7 @@ export function Controls({ setSecurityOpen, showSecurityLock }: ControlsProps) {
         {isZ360 && conversationId && (
           <div className="mt-2 flex items-center space-x-2">
             <a
-              href={`https://admin---${conversationId}.openhands.zikrainfotech.com`}
+              href={`https://admin---${conversationId}.z-scripts.zikrainfotech.com`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-4 py-2 text-xs border border-primarylight text-primarylight rounded hover:bg-primarylight hover:text-black transition-colors duration-150"
@@ -49,7 +49,7 @@ export function Controls({ setSecurityOpen, showSecurityLock }: ControlsProps) {
               SaaS Instance
             </a>
             <a
-              href={`https://main---${conversationId}.openhands.zikrainfotech.com`}
+              href={`https://main---${conversationId}.z-scripts.zikrainfotech.com`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-4 py-2 text-xs border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors duration-150"
