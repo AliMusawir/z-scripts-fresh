@@ -21,7 +21,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ammog@35.223.193.96 << EOF
+          ssh -o StrictHostKeyChecking=no ammog@35.223.193.96 << 'EOF'
             set -e
 
             cd /home/z-scripts
