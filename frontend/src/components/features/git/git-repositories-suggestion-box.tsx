@@ -54,7 +54,7 @@ export function GitRepositoriesSuggestionBox({
     <SuggestionBox
       title={t(I18nKey.LANDING$OPEN_REPO)}
       content={
-        !isLoggedIn ? (
+        isLoggedIn ? (
           <GitRepositorySelector
             onInputChange={setSearchQuery}
             onSelect={handleSubmit}
