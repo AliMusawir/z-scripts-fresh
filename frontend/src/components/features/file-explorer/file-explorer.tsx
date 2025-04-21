@@ -30,7 +30,17 @@ export function FileExplorer({ isOpen, onToggle }: FileExplorerProps) {
 
   const handleOpenVSCode = () => {
     if (vscodeUrl?.vscode_url) {
-      window.open(vscodeUrl.vscode_url, "_blank");
+      const sessionId = window.location.href
+        .split("/conversations/")[1] // e.g. "5fe557fa00f840e2b391a3da33eeae27/terminal"
+        .split("/")[0]; // -> "5fe557fa00f840e2b391a3da33eeae27"
+
+      // Extract the query string from the vscode_url
+      const queryString = vscodeUrl.vscode_url.split("?")[1] || "";
+
+      // Build the final URL
+      const finalUrl = `vscode---${sessionId}.${window.location.host}?${queryString}`;
+
+      window.open(finalUrl, "_blank");
     } else if (vscodeUrl?.error) {
       toast.error(
         `open-vscode-error-${new Date().getTime()}`,
