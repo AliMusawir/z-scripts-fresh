@@ -38,7 +38,7 @@ export function FileExplorer({ isOpen, onToggle }: FileExplorerProps) {
       const queryString = vscodeUrl.vscode_url.split("?")[1] || "";
 
       // Build the final URL
-      const finalUrl = `vscode---${sessionId}.${window.location.host}?${queryString}`;
+      const finalUrl = `https://vscode---${sessionId}.${window.location.host}?${queryString}`;
 
       window.open(finalUrl, "_blank");
     } else if (vscodeUrl?.error) {
