@@ -22,20 +22,21 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN apt-get update -y \
     && apt-get install -y curl make git build-essential \
-    && python3 -m pip install poetry==1.8.2  --break-system-packages
+    && python3 -m pip install poetry==1.8.2 --break-system-packages
 
 COPY ./pyproject.toml ./poetry.lock ./
 RUN touch README.md
-RUN export POETRY_CACHE_DIR && poetry install --without evaluation --no-root && rm -rf $POETRY_CACHE_DIR
+
+# ✅ Fixed: Correctly set and use POETRY_CACHE_DIR
+RUN poetry install --without evaluation --no-root && rm -rf $POETRY_CACHE_DIR
 
 FROM python:3.12.3-slim AS openhands-app
 
 WORKDIR /app
 
-ARG OPENHANDS_BUILD_VERSION #re-declare for this section
+ARG OPENHANDS_BUILD_VERSION
 
 ENV RUN_AS_OPENHANDS=true
-# A random number--we need this to be different from the user's UID on the host machine
 ENV OPENHANDS_USER_ID=42420
 ENV SANDBOX_LOCAL_RUNTIME_URL=http://host.docker.internal
 ENV USE_HOST_NETWORK=false
@@ -51,9 +52,7 @@ RUN apt-get update -y \
     && apt-get install -y curl ssh sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Default is 1000, but OSX is often 501
 RUN sed -i 's/^UID_MIN.*/UID_MIN 499/' /etc/login.defs
-# Default is 60000, but we've seen up to 200000
 RUN sed -i 's/^UID_MAX.*/UID_MAX 1000000/' /etc/login.defs
 
 RUN groupadd app
@@ -81,10 +80,7 @@ COPY --chown=openhands:app ./README.md ./README.md
 COPY --chown=openhands:app ./MANIFEST.in ./MANIFEST.in
 COPY --chown=openhands:app ./LICENSE ./LICENSE
 
-# This is run as "openhands" user, and will create __pycache__ with openhands:openhands ownership
-RUN python openhands/core/download.py # No-op to download assets
-# Add this line to set group ownership of all files/directories not already in "app" group
-# openhands:openhands -> openhands:app
+RUN python openhands/core/download.py
 RUN find /app \! -group app -exec chgrp app {} +
 
 COPY --chown=openhands:app --chmod=770 --from=frontend-builder /app/build ./frontend/build
