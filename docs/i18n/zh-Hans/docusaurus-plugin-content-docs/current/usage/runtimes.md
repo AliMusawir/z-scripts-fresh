@@ -1,7 +1,11 @@
-# 运行时配置
+---
+slug: /usage/runtimes
+title: Runtime Configuration
+---
 
-运行时是 OpenHands 代理可以编辑文件和运行命令的环境。
+import { Redirect } from '@docusaurus/router';
 
+<<<<<<< HEAD
 默认情况下，OpenHands 使用基于 Docker 的运行时，在您的本地计算机上运行。这意味着您只需要为使用的 LLM 付费，并且您的代码只会发送到 LLM。
 
 我们还支持"远程"运行时，通常由第三方管理。它们可以使设置更简单、更具可扩展性，特别是当您并行运行多个 OpenHands 对话时（例如进行评估）。
@@ -74,3 +78,6 @@ docker run # ...
     -e MODAL_API_TOKEN_ID="your-id" \
     -e MODAL_API_TOKEN_SECRET="your-secret" \
 ```
+=======
+<Redirect to="/modules/usage/runtimes-index" />
+>>>>>>> tags/0.39.0

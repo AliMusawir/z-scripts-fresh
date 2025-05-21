@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import posthog from "posthog-js";
 import { setReplayJson } from "#/state/initial-query-slice";
@@ -12,22 +13,28 @@ import BuildIt from "#/icons/z360Logo.svg?react";
 import { TaskForm } from "#/components/shared/task-form";
 import { convertFileToText } from "#/utils/convert-file-to-text";
 import { ENABLE_TRAJECTORY_REPLAY } from "#/utils/feature-flags";
+=======
+import { PrefetchPageLinks } from "react-router";
+import { HomeHeader } from "#/components/features/home/home-header";
+import { RepoConnector } from "#/components/features/home/repo-connector";
+import { TaskSuggestions } from "#/components/features/home/tasks/task-suggestions";
+import { useUserProviders } from "#/hooks/use-user-providers";
+>>>>>>> tags/0.39.0
 
-function Home() {
-  const dispatch = useDispatch();
-  const formRef = React.useRef<HTMLFormElement>(null);
+<PrefetchPageLinks page="/conversations/:conversationId" />;
 
-  const { data: config } = useConfig();
-  const { data: user } = useGitUser();
+function HomeScreen() {
+  const { providers } = useUserProviders();
+  const [selectedRepoTitle, setSelectedRepoTitle] = React.useState<
+    string | null
+  >(null);
 
-  const gitHubAuthUrl = useGitHubAuthUrl({
-    appMode: config?.APP_MODE || null,
-    gitHubClientId: config?.GITHUB_CLIENT_ID || null,
-  });
+  const providersAreSet = providers.length > 0;
 
   return (
     <div
       data-testid="home-screen"
+<<<<<<< HEAD
       className=" bg-white text-[#6A6A6C] h-full   relative rounded-2xl overflow-hidden"
     >
       <div className="bg-gradient-to-br from-[#1FACD3]/80  to-[#FFD436]/80 w-full h-full flex flex-col items-center justify-center relative overflow-y-auto ">
@@ -77,8 +84,23 @@ function Home() {
           </div>
         </div>
       </div>
+=======
+      className="bg-base-secondary h-full flex flex-col rounded-xl px-[42px] pt-[42px] gap-8 overflow-y-auto"
+    >
+      <HomeHeader />
+
+      <hr className="border-[#717888]" />
+
+      <main className="flex flex-col md:flex-row justify-between gap-8">
+        <RepoConnector
+          onRepoSelection={(title) => setSelectedRepoTitle(title)}
+        />
+        <hr className="md:hidden border-[#717888]" />
+        {providersAreSet && <TaskSuggestions filterFor={selectedRepoTitle} />}
+      </main>
+>>>>>>> tags/0.39.0
     </div>
   );
 }
 
-export default Home;
+export default HomeScreen;

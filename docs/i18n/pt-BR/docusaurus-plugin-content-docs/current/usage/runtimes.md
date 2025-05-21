@@ -1,7 +1,11 @@
-# Configuração de Runtime
+---
+slug: /usage/runtimes
+title: Runtime Configuration
+---
 
-Um Runtime é um ambiente onde o agente OpenHands pode editar arquivos e executar comandos.
+import { Redirect } from '@docusaurus/router';
 
+<<<<<<< HEAD
 Por padrão, o OpenHands usa um runtime baseado em Docker, executando no seu computador local. Isso significa que você só precisa pagar pelo LLM que está usando, e seu código é enviado apenas para o LLM.
 
 Também suportamos runtimes "remotos", que são tipicamente gerenciados por terceiros. Eles podem tornar a configuração um pouco mais simples e escalável, especialmente se você estiver executando muitas conversas do OpenHands em paralelo (por exemplo, para fazer avaliação).
@@ -163,3 +167,6 @@ O Runtime Local é particularmente útil para:
 - Testes e desenvolvimento do próprio OpenHands.
 - Ambientes onde o uso de contêineres é restrito.
 - Cenários onde o acesso direto ao sistema de arquivos é necessário.
+=======
+<Redirect to="/modules/usage/runtimes-index" />
+>>>>>>> tags/0.39.0

@@ -1,5 +1,11 @@
+---
+slug: /usage/runtimes
+title: Runtime Configuration
+---
 
+import { Redirect } from '@docusaurus/router';
 
+<<<<<<< HEAD
 # Configuration d'exécution
 
 Un Runtime est un environnement où l'agent OpenHands peut modifier des fichiers et exécuter des commandes.
@@ -76,3 +82,6 @@ docker run # ...
     -e MODAL_API_TOKEN_ID="votre-id" \
     -e MODAL_API_TOKEN_SECRET="votre-secret" \
 ```
+=======
+<Redirect to="/modules/usage/runtimes-index" />
+>>>>>>> tags/0.39.0
