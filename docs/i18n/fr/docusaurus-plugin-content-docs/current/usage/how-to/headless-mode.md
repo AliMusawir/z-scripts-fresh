@@ -34,11 +34,7 @@ Pour exécuter OpenHands en mode Headless avec Docker :
 ```bash
 docker run -it \
     --pull=always \
-<<<<<<< HEAD
-    -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.33-nikolaik \
-=======
     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.39-nikolaik \
->>>>>>> tags/0.39.0
     -e SANDBOX_USER_ID=$(id -u) \
     -e SANDBOX_VOLUMES=$SANDBOX_VOLUMES \
     -e LLM_API_KEY=$LLM_API_KEY \
@@ -48,13 +44,8 @@ docker run -it \
     -v ~/.openhands-state:/.openhands-state \
     --add-host host.docker.internal:host-gateway \
     --name openhands-app-$(date +%Y%m%d%H%M%S) \
-<<<<<<< HEAD
-    docker.all-hands.dev/all-hands-ai/openhands:0.33 \
-    python -m openhands.core.main -t "write a bash script that prints hi" --no-auto-continue
-=======
     docker.all-hands.dev/all-hands-ai/openhands:0.39 \
     python -m openhands.core.main -t "write a bash script that prints hi"
->>>>>>> tags/0.39.0
 ```
 
 Le paramètre `-e SANDBOX_USER_ID=$(id -u)` est transmis à la commande Docker pour s'assurer que l'utilisateur du sandbox correspond aux permissions de l'utilisateur hôte. Cela empêche l'agent de créer des fichiers appartenant à root dans l'espace de travail monté.
