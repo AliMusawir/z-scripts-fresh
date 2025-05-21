@@ -31,11 +31,7 @@ This command opens an interactive prompt where you can type tasks or commands an
 ```bash
 docker run -it \
     --pull=always \
-<<<<<<< HEAD
-    -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.33-nikolaik \
-=======
     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.39-nikolaik \
->>>>>>> tags/0.39.0
     -e SANDBOX_USER_ID=$(id -u) \
     -e SANDBOX_VOLUMES=$SANDBOX_VOLUMES \
     -e LLM_API_KEY=$LLM_API_KEY \
@@ -44,13 +40,8 @@ docker run -it \
     -v ~/.openhands-state:/.openhands-state \
     --add-host host.docker.internal:host-gateway \
     --name openhands-app-$(date +%Y%m%d%H%M%S) \
-<<<<<<< HEAD
-    docker.all-hands.dev/all-hands-ai/openhands:0.33 \
-    python -m openhands.core.cli
-=======
     docker.all-hands.dev/all-hands-ai/openhands:0.39 \
     python -m openhands.cli.main
->>>>>>> tags/0.39.0
 ```
 
 This launches the CLI in Docker, allowing you to interact with OpenHands as described above.

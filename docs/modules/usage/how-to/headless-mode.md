@@ -31,11 +31,7 @@ To run OpenHands in Headless mode with Docker:
 ```bash
 docker run -it \
     --pull=always \
-<<<<<<< HEAD
-    -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.33-nikolaik \
-=======
     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.39-nikolaik \
->>>>>>> tags/0.39.0
     -e SANDBOX_USER_ID=$(id -u) \
     -e SANDBOX_VOLUMES=$SANDBOX_VOLUMES \
     -e LLM_API_KEY=$LLM_API_KEY \
@@ -45,11 +41,7 @@ docker run -it \
     -v ~/.openhands-state:/.openhands-state \
     --add-host host.docker.internal:host-gateway \
     --name openhands-app-$(date +%Y%m%d%H%M%S) \
-<<<<<<< HEAD
-    docker.all-hands.dev/all-hands-ai/openhands:0.33 \
-=======
     docker.all-hands.dev/all-hands-ai/openhands:0.39 \
->>>>>>> tags/0.39.0
     python -m openhands.core.main -t "write a bash script that prints hi"
 ```
 
