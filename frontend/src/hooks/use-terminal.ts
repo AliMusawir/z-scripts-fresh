@@ -23,32 +23,14 @@ const DEFAULT_TERMINAL_CONFIG: UseTerminalConfig = {
 };
 
 const renderCommand = (command: Command, terminal: Terminal) => {
-<<<<<<< HEAD
-  const { content, type } = command;
-
-  if (type === "input") {
-    terminal.write("$ ");
-    terminal.writeln(
-      parseTerminalOutput(content.replaceAll("\n", "\r\n").trim()),
-    );
-  } else {
-    terminal.write(`\n`);
-    terminal.writeln(
-      parseTerminalOutput(content.replaceAll("\n", "\r\n").trim()),
-    );
-    terminal.write(`\n`);
-  }
-=======
   const { content } = command;
 
   terminal.writeln(
-    parseTerminalOutput(content.replaceAll("\n", "\r\n").trim()),
+    parseTerminalOutput(content.replaceAll("\n", "\r\n").trim())
   );
->>>>>>> tags/0.39.0
 };
 
 // Create a persistent reference that survives component unmounts
-// This ensures terminal history is preserved when navigating away and back
 const persistentLastCommandIndex = { current: 0 };
 
 export const useTerminal = ({
@@ -59,7 +41,7 @@ export const useTerminal = ({
   const terminal = React.useRef<Terminal | null>(null);
   const fitAddon = React.useRef<FitAddon | null>(null);
   const ref = React.useRef<HTMLDivElement>(null);
-  const lastCommandIndex = persistentLastCommandIndex; // Use the persistent reference
+  const lastCommandIndex = persistentLastCommandIndex;
   const keyEventDisposable = React.useRef<{ dispose: () => void } | null>(null);
   const disabled = RUNTIME_INACTIVE_STATES.includes(curAgentState);
 
@@ -79,13 +61,10 @@ export const useTerminal = ({
     }
   };
 
-<<<<<<< HEAD
-=======
   const copySelection = (selection: string) => {
     const clipboardItem = new ClipboardItem({
       "text/plain": new Blob([selection], { type: "text/plain" }),
     });
-
     navigator.clipboard.write([clipboardItem]);
   };
 
@@ -116,11 +95,7 @@ export const useTerminal = ({
 
   const handleEnter = (command: string) => {
     terminal.current?.write("\r\n");
-    // Don't write the command again as it will be added to the commands array
-    // and rendered by the useEffect that watches commands
     send(getTerminalCommand(command));
-    // Don't add the prompt here as it will be added when the command is processed
-    // and the commands array is updated
   };
 
   const handleBackspace = (command: string) => {
@@ -128,7 +103,6 @@ export const useTerminal = ({
     return command.slice(0, -1);
   };
 
->>>>>>> tags/0.39.0
   // Initialize terminal and handle cleanup
   React.useEffect(() => {
     terminal.current = createTerminal();
@@ -136,24 +110,16 @@ export const useTerminal = ({
 
     if (ref.current) {
       initializeTerminal();
-      // Render all commands in array
-      // This happens when we just switch to Terminal from other tabs
       if (commands.length > 0) {
         for (let i = 0; i < commands.length; i += 1) {
-<<<<<<< HEAD
-=======
           if (commands[i].type === "input") {
             terminal.current.write("$ ");
           }
->>>>>>> tags/0.39.0
           renderCommand(commands[i], terminal.current);
         }
         lastCommandIndex.current = commands.length;
       }
-<<<<<<< HEAD
-=======
       terminal.current.write("$ ");
->>>>>>> tags/0.39.0
     }
 
     return () => {
@@ -162,10 +128,6 @@ export const useTerminal = ({
   }, []);
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    // Render new commands when they are added to the commands array
-=======
->>>>>>> tags/0.39.0
     if (
       terminal.current &&
       commands.length > 0 &&
@@ -173,11 +135,6 @@ export const useTerminal = ({
     ) {
       let lastCommandType = "";
       for (let i = lastCommandIndex.current; i < commands.length; i += 1) {
-<<<<<<< HEAD
-        renderCommand(commands[i], terminal.current);
-      }
-      lastCommandIndex.current = commands.length;
-=======
         lastCommandType = commands[i].type;
         renderCommand(commands[i], terminal.current);
       }
@@ -185,7 +142,6 @@ export const useTerminal = ({
       if (lastCommandType === "output") {
         terminal.current.write("$ ");
       }
->>>>>>> tags/0.39.0
     }
   }, [commands, disabled]);
 
@@ -207,7 +163,6 @@ export const useTerminal = ({
 
   React.useEffect(() => {
     if (terminal.current) {
-      // Dispose of existing listeners if they exist
       if (keyEventDisposable.current) {
         keyEventDisposable.current.dispose();
         keyEventDisposable.current = null;
@@ -216,7 +171,6 @@ export const useTerminal = ({
       let commandBuffer = "";
 
       if (!disabled) {
-        // Add new key event listener and store the disposable
         keyEventDisposable.current = terminal.current.onKey(
           ({ key, domEvent }) => {
             if (domEvent.key === "Enter") {
@@ -227,24 +181,21 @@ export const useTerminal = ({
                 commandBuffer = handleBackspace(commandBuffer);
               }
             } else {
-              // Ignore paste event
               if (key.charCodeAt(0) === 22) {
                 return;
               }
               commandBuffer += key;
               terminal.current?.write(key);
             }
-          },
+          }
         );
 
-        // Add custom key handler and store the disposable
         terminal.current.attachCustomKeyEventHandler((event) =>
           pasteHandler(event, (text) => {
             commandBuffer += text;
-          }),
+          })
         );
       } else {
-        // Add a noop handler when disabled
         keyEventDisposable.current = terminal.current.onKey((e) => {
           e.domEvent.preventDefault();
           e.domEvent.stopPropagation();
